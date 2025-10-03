@@ -1,0 +1,37 @@
+body {
+    background-image: url(../img/background.webp);
+    background-size: cover;
+}
+
+.borde-propio {
+    border-color: #87d1ee !important;
+}
+
+.navbar-brand:hover {
+    color: #87d1ee;
+    text-shadow: 0 0 5px #87d1ee, 0 0 10px #87d1ee;
+}
+
+.navbar-nav .nav-link {
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #87d1ee;
+    text-shadow: 0 0 5px #87d1ee, 0 0 10px #87d1ee;
+}
+
+.icono {
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.icono:hover {
+    color: #87d1ee;
+    text-shadow: 0 0 5px #87d1ee, 0 0 10px #87d1ee;
+}
+
+.cuadrado-hover:hover {
+    background-color: #87d1ee !important;
+}

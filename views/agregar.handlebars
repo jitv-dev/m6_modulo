@@ -1,0 +1,46 @@
+<div class="container my-5">
+    <div class="card shadow-sm border borde-propio border-2">
+        <div class="card-header bg-black text-white py-3">
+            <h4 class="mb-0 fw-bold text-center">Agregar nuevo contacto</h4>
+        </div>
+        <div class="card-body p-4">
+            <form action="/contactos" method="post" enctype="multipart/form-data">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label fw-semibold">Nombre</label>
+                        <input type="text" name="nombre" class="form-control form-control-lg" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label fw-semibold">Región</label>
+                        <input type="text" name="region" class="form-control form-control-lg" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label fw-semibold">Comuna</label>
+                        <input type="text" name="comuna" class="form-control form-control-lg" required>
+                    </div>
+                </div>
+    
+                <div class="row g-3 mt-2">
+                    <div class="col-md-3">
+                        <label class="form-label fw-semibold">Teléfono</label>
+                        <input type="text" name="telefono" class="form-control form-control-lg" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label fw-semibold">Correo</label>
+                        <input type="email" name="correo" class="form-control form-control-lg" required>
+                    </div>
+                    <div class="col-md-5">
+                        <label class="form-label fw-semibold">Foto</label>
+                        <input type="file" name="foto" class="form-control form-control-lg" required>
+                    </div>
+                </div>
+    
+                <div class="mt-4 text-center">
+                    <button type="submit" class="btn btn-primary btn-lg px-4 fw-semibold">
+                        Agregar Contacto
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

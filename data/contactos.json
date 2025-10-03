@@ -1,0 +1,29 @@
+[
+    {
+        "id": 1759450219450,
+        "nombre": "Toty",
+        "region": "Metropolitana De Santiago",
+        "comuna": "Cerrillos",
+        "telefono": "1234",
+        "correo": "toty@gmail.com",
+        "foto": "toty_1759454769782.jpg"
+    },
+    {
+        "id": 1759454756937,
+        "nombre": "Myrddin Emrys Pendragón",
+        "region": "Aisén del General Carlos Ibáñez del Campo",
+        "comuna": "Chile Chico",
+        "telefono": "+56 9 8224-5133",
+        "correo": "myrddin.emrys@arturocorp.cl",
+        "foto": "myrddin emrys pendragón_1759454756762.jpg"
+    },
+    {
+        "id": 1759454803976,
+        "nombre": "Inu",
+        "region": "Metropolitana De Santiago",
+        "comuna": "Macul",
+        "telefono": "123456789",
+        "correo": "inu@gmail.com",
+        "foto": "inu_1759454803721.jpg"
+    }
+]

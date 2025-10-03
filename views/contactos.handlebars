@@ -1,0 +1,123 @@
+<div class="container my-5">
+
+    <div class="card border borde-propio border-2 shadow-sm mb-5">
+        <div class="card-header bg-black py-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="flex-grow-1 text-center">
+                    <h4 class="mb-0 fw-bold text-white">
+                        {{#if busqueda}}
+                        Resultados de Búsqueda ({{contactos.length}})
+                        {{else}}
+                        Lista de Contactos ({{contactos.length}})
+                        {{/if}}
+                    </h4>
+                </div>
+            </div>
+        </div>
+        <div class="card-body p-4">
+            {{#if contactos.length}}
+            <div class="row g-4">
+                {{#each contactos as |contacto|}}
+                <div class="col-xl-4 col-lg-6 col-md-6">
+                    <div class="card h-100 border shadow-sm">
+                        <div class="card-body">
+                            <img class="card-img-top" src="/img/{{contacto.foto}}" alt="Imagen de {{contacto.nombre}}"
+                                style="object-fit: fill; height:200px" />
+
+                            <h5 class="card-title text-primary fw-bold my-3 text-center">{{contacto.nombre}}</h5>
+
+                            <p><strong>Región:</strong> {{contacto.region}}</p>
+                            <p><strong>Comuna:</strong> {{contacto.comuna}}</p>
+                            <p><strong>Teléfono:</strong> {{contacto.telefono}}</p>
+                            <p><strong>Correo:</strong> {{contacto.correo}}</p>
+
+                            <div class="d-grid gap-2 d-md-flex">
+                                <button class="btn btn-warning btn-sm flex-fill me-md-2" data-bs-toggle="modal"
+                                    data-bs-target="#editModal-{{contacto.id}}">
+                                    Modificar
+                                </button>
+                                <form action="/contactos/{{contacto.id}}?_method=DELETE" method="POST"
+                                    class="flex-fill">
+                                    <button type="submit" class="btn btn-danger btn-sm w-100">
+                                        Eliminar
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {{!-- Modal --}}
+                <div class="modal fade" id="editModal-{{contacto.id}}" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header bg-warning text-dark">
+                                <h5 class="modal-title fw-bold">Editar Contacto</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <form action="/contactos/{{contacto.id}}?_method=PUT" method="POST"
+                                enctype="multipart/form-data">
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <label class="form-label fw-semibold">Nombre</label>
+                                        <input type="text" name="nombre" class="form-control"
+                                            value="{{contacto.nombre}}" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label fw-semibold">Región</label>
+                                        <input type="text" name="region" class="form-control"
+                                            value="{{contacto.region}}" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label fw-semibold">Comuna</label>
+                                        <input type="text" name="comuna" class="form-control"
+                                            value="{{contacto.comuna}}" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label fw-semibold">Teléfono</label>
+                                        <input type="text" name="telefono" class="form-control"
+                                            value="{{contacto.telefono}}" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label fw-semibold">Correo</label>
+                                        <input type="email" name="correo" class="form-control"
+                                            value="{{contacto.correo}}" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label fw-semibold">Foto (opcional)</label>
+                                        <input type="file" name="foto" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary fw-semibold">Guardar Cambios</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+            {{else}}
+            <div class="text-center py-5">
+                <div class="text-muted">
+                    {{#if busqueda}}
+                    <h5 class="fw-bold mb-3">No se encontraron contactos</h5>
+                    <p class="mb-3">No hay resultados para "<strong>{{busqueda}}</strong>"</p>
+                    <a href="/contactos" class="btn btn-primary">
+                        <i class="fas fa-list me-1"></i>Ver todos los contactos
+                    </a>
+                    {{else}}
+                    <h5 class="fw-bold mb-3">No hay contactos registrados</h5>
+                    <p class="mb-3 text-muted">Comienza agregando tu primer contacto.</p>
+                    <a href="/agregar" class="btn btn-success btn-lg">
+                        <i class="fas fa-plus me-2"></i>Agregar Primer Contacto
+                    </a>
+                    {{/if}}
+                </div>
+            </div>
+            {{/if}}
+        </div>
+    </div>
+</div>

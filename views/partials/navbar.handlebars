@@ -1,0 +1,24 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-black border borde-propio border-2" data-bs-theme="dark">
+    <div class="container-fluid">
+        <a class="navbar-brand me-3 fw-bold fs-3" href="/home">PersonAPP</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+            aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <div class="navbar-nav me-auto mb-2 mb-lg-0">
+                <a class="nav-link active" href="/home">Inicio</a>
+                <a class="nav-link active" href="/contactos">Contactos</a>
+                <a class="nav-link active" href="/contactos/agregar">Añadir Contacto</a>
+                <a class="nav-link active" href="/about">Sobre la APP</a>
+            </div>
+            <form class="d-flex my-2 my-lg-0" action="/contactos" method="GET">
+                <input class="form-control bg-black text-light border borde-propio me-2 search-outline-primary"
+                    type="search" placeholder="Busca tu contacto" aria-label="Search".
+                    name="q"
+                    value="{{busqueda}}">
+                <button class="btn btn-outline-primary text-light border borde-propio" type="submit">Buscar</button>
+            </form>
+        </div>
+    </div>
+</nav>

@@ -24,7 +24,7 @@ Una aplicación web moderna desarrollada en Node.js para la gestión eficiente d
 - **bootstrap-icons** - Librería de iconos
 - **handlebars** - Templating del lado del cliente
 
-## 🛠️ Instalación y Uso
+## Instalación y Uso
 
 1. **Clonar e instalar dependencias:**
 - **npm install**
@@ -34,4 +34,4 @@ Una aplicación web moderna desarrollada en Node.js para la gestión eficiente d
 - **npm start**
 
 3. **Acceder en el navegador:**
-- **[npm start](http://localhost:3000)**
+- **http://localhost:3000**

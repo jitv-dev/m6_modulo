@@ -23,3 +23,15 @@ Una aplicación web moderna desarrollada en Node.js para la gestión eficiente d
 - **bootstrap** - Framework CSS para diseño responsive
 - **bootstrap-icons** - Librería de iconos
 - **handlebars** - Templating del lado del cliente
+
+## 🛠️ Instalación y Uso
+
+1. **Clonar e instalar dependencias:**
+- **npm install**
+    
+
+2. **Ejecutar la aplicacion:**
+- **npm start**
+
+3. **Acceder en el navegador:**
+- **[npm start](http://localhost:3000)**

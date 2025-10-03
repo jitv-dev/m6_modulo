@@ -37,96 +37,125 @@ app.use((req, res, next) => {
 })
 
 app.get("/", async (req, res) => {
-    res.redirect("/home")
+        res.redirect("/home")
 })
 
 app.get("/home", async (req, res) => {
-    const contactos = await listarContactos()
-    res.render("home", {
-        titulo: "Inicio",
-        contactos,
-        busqueda: ''
-    })
+    try {
+        const contactos = await listarContactos()
+        res.render("home", {
+            titulo: "Inicio",
+            contactos,
+            busqueda: ''
+        })
+    } catch (error) {
+        console.error("Ha ocurrido un error", error)
+    }
+
 })
 
 app.get("/contactos", async (req, res) => {
-    const { q } = req.query
+    try {
+        const { q } = req.query
 
-    let contactos = await listarContactos()
+        let contactos = await listarContactos()
 
-    if (q) {
-        const busqueda = q.toLowerCase()
-        contactos = contactos.filter(contacto =>
-            contacto.nombre.toLowerCase().includes(busqueda) ||
-            contacto.region.toLowerCase().includes(busqueda) ||
-            contacto.comuna.toLowerCase().includes(busqueda) ||
-            contacto.telefono.toLowerCase().includes(busqueda) ||
-            contacto.correo.toLowerCase().includes(busqueda)
-        )
+        if (q) {
+            const busqueda = q.toLowerCase()
+            contactos = contactos.filter(contacto =>
+                contacto.nombre.toLowerCase().includes(busqueda) ||
+                contacto.region.toLowerCase().includes(busqueda) ||
+                contacto.comuna.toLowerCase().includes(busqueda) ||
+                contacto.telefono.toLowerCase().includes(busqueda) ||
+                contacto.correo.toLowerCase().includes(busqueda)
+            )
+        }
+
+        res.render("contactos", {
+            titulo: "Lista de contactos",
+            contactos,
+            busqueda: q || ''
+        })
+    } catch (error) {
+        console.error("Ha ocurrido un error", error)
     }
 
-    res.render("contactos", {
-        titulo: "Lista de contactos",
-        contactos,
-        busqueda: q || ''
-    })
 })
 
 app.get("/contactos/agregar", async (req, res) => {
-    res.render("agregar", { 
-        titulo: "Agregar nuevo contacto",
-        busqueda: ''
-    })
+    try {
+        res.render("agregar", {
+            titulo: "Agregar nuevo contacto",
+            busqueda: ''
+        })
+    } catch (error) {
+        console.error("Ha ocurrido un error", error)
+    }
+
 })
 
 app.get("/about", async (req, res) => {
-    res.render("about", {
-        titulo: "Sobre la APP",
-        busqueda: ''
-    })
+    try {
+        res.render("about", {
+            titulo: "Sobre la APP",
+            busqueda: ''
+        })
+    } catch (error) {
+        console.error("Ha ocurrido un error", error)
+    }
 })
 
 app.post("/contactos", async (req, res) => {
-    const { nombre, region, comuna, telefono, correo } = req.body
-    if (!req.files || !req.files.foto) {
-        return res.status(400).send("No se subió ninguna foto")
-    }
-    const foto = req.files.foto
-    const nombreArchivo = `${nombre.trim().toLowerCase()}_${Date.now() + path.extname(foto.name)}`
-    const rutaGuardar = path.join(__dirname, "public", "img", nombreArchivo)
-    const imagen = await Jimp.read(foto.data)
-    await imagen.resize({ w: 300 }).write(rutaGuardar)
+    try {
+        const { nombre, region, comuna, telefono, correo } = req.body
+        if (!req.files || !req.files.foto) {
+            return res.status(400).send("No se subió ninguna foto")
+        }
+        const foto = req.files.foto
+        const nombreArchivo = `${nombre.trim().toLowerCase()}_${Date.now() + path.extname(foto.name)}`
+        const rutaGuardar = path.join(__dirname, "public", "img", nombreArchivo)
+        const imagen = await Jimp.read(foto.data)
+        await imagen.resize({ w: 300 }).write(rutaGuardar)
 
-    const nuevoContacto = {
-        id: Date.now(),
-        nombre,
-        region,
-        comuna,
-        telefono,
-        correo,
-        foto: nombreArchivo
-    }
-    await agregarContacto(nuevoContacto)
+        const nuevoContacto = {
+            id: Date.now(),
+            nombre,
+            region,
+            comuna,
+            telefono,
+            correo,
+            foto: nombreArchivo
+        }
+        await agregarContacto(nuevoContacto)
 
-    console.log(nuevoContacto)
-    res.redirect("/contactos")
+        console.log(nuevoContacto)
+        res.redirect("/contactos")
+    } catch (error) {
+        console.error("Error en POST", error)
+    }
+
 })
 
 app.delete("/contactos/:id", async (req, res) => {
-    const id = parseInt(req.params.id)
-    const contactos = await listarContactos()
-    const contacto = contactos.find(c => c.id === id)
-    const rutaImagen = path.join(__dirname, "public", "img", contacto.foto)
-    fs.unlink(rutaImagen, (err) => {
-        if (err) {
-            console.error("No se pudo eliminar la imagen", err)
-        } else {
-            console.log(`Imagen de ${contacto.nombre} borrada exitosamente`)
-        }
-    })
+    try {
+        const id = parseInt(req.params.id)
+        const contactos = await listarContactos()
+        const contacto = contactos.find(c => c.id === id)
+        const rutaImagen = path.join(__dirname, "public", "img", contacto.foto)
+        fs.unlink(rutaImagen, (err) => {
+            if (err) {
+                console.error("No se pudo eliminar la imagen", err)
+            } else {
+                console.log(`Imagen de ${contacto.nombre} borrada exitosamente`)
+            }
+        })
 
-    await borrarContacto(id)
-    res.redirect("/contactos")
+        await borrarContacto(id)
+        res.redirect("/contactos")
+    } catch (error) {
+        console.error("Error en DELETE", error)
+    }
+
 })
 
 app.put("/contactos/:id", async (req, res) => {

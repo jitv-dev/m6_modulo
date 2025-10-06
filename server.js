@@ -216,10 +216,22 @@ app.put("/contactos/:id", async (req, res) => {
     }
 })
 
+// Queria probar si funcionaba el error
+app.get("/test-error", (req, res, next) => {
+    next(new Error("Prueba error 500"))
+})
+
+app.use((err, req, res, next) => {
+    console.error("Error detectado:", err.message)
+    res.status(500).render("500", {
+        titulo: "Error del servidor",
+        mensaje: "Ha ocurrido un error interno. Por favor intenta nuevamente."
+    })
+})
 
 app.use((req, res) => {
     res.status(404).render("404", {
-        titulo: "Página no encontrada",
+        titulo: "Error 404 - Página no encontrada",
         mensaje: "La página que buscas no existe."
     })
 })

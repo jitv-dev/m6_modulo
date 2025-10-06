@@ -51,7 +51,6 @@ app.get("/home", async (req, res) => {
     } catch (error) {
         console.error("Ha ocurrido un error", error)
     }
-
 })
 
 app.get("/contactos", async (req, res) => {
